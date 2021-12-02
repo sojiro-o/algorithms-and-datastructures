@@ -3,15 +3,22 @@
 ## 入出力
 #### いきなり行列としてinputする時
 ```.py
-[list(map(int,input().split()) for _ in range(high))]
+[list(map(int,input().split())) for _ in range(N)]
 ```
+#### 空の頂点隣接リスト
+rinsetu= [[] for _ in range(H*W)]
 
 #### 複数行に渡る出力する時
 ```.py
 ans = list(hogehoge)
 print(*ans, sep = "\n")
 ```
-
+#### 入力の高速化
+```.py
+import sys
+input = sys.stdin.readline
+```
+ただし、インタラクティブシェルでやると壊れる
 ## 修飾
 #### 文字の一部を置き換える時
 ```.py
@@ -22,3 +29,8 @@ word = word.replace("前","後")
 list[i+1] += list[i]
 ```
 
+
+# もう一回やる問題
+43 58
+
+# 星4の58以降をもう一回
