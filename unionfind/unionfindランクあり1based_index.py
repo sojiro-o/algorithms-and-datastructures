@@ -1,9 +1,9 @@
-from collections import defaultdict
+from collections import defaultdict # グループ毎のノードを格納した二重リストを使用する時だけ使うから遅くはならないよ
 
 class UnionFind():
     """
     Union Find木クラス
-
+    1 based index
     Attributes
     --------------------
     n : int
@@ -137,7 +137,7 @@ class UnionFind():
         group_members : defaultdict
             根をキーとしたノードのリスト
         """
-        group_members = defaultdict(list)
+        group_members = defaultdict(list) # lanbda型の辞書ではなくてリストを取ることもできる
         for member in range(self.n):
             group_members[self.find(member)].append(member)
         return group_members

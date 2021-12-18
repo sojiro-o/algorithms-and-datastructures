@@ -19,6 +19,7 @@ XOR：0
 ide_ele = 0 # 初期値（単位元）の設定
 
 class LazySegmentTree:
+    # 0 index, init_valに初期配列を格納
     def __init__(self, init_val, segfunc, ide_ele):
         n = len(init_val) # init_valが初期値のリストになる。今回はa = [0] * w、本来的に扱いたい数たちの個数
         self.segfunc = segfunc
@@ -38,15 +39,15 @@ class LazySegmentTree:
         l += self.num # 底辺はself.numから始まるのでプラスする
         r += self.num
         lm = l >> (l & -l).bit_length() # ある数の約数の中で2**xの形で表せられるものの中で最大のもの
-        rm = r >> (r & -r).bit_length()
+        rm = r >> (r & -r).bit_length() # 初めて自分より小さい値が入ってくるような覆いかぶさりの値
         # 例: l=3, r=8の場合、
         while l < r: # 返り値は２つ
             if l <= lm:
                 yield l
             if r <= rm:
                 yield r
-            r >>= 1
-            l >>= 1
+            r >>= 1  # 2で割っている
+            l >>= 1  # 奇数の上に完全覆いかぶさりは存在せず、2で割り続けて最初に出てくる奇数はそれまでの完全覆いかぶさり
         while l: # 返り値は１つ
             yield l
             l >>= 1
@@ -102,6 +103,6 @@ a = [0] * w
 seg = LazySegmentTree(a, segfunc, ide_ele)
 for i in range(n):
     l, r = map(int,input().split())
-    cnt = seg.query(l - 1, r) # l は0index, r は1index (lからrまでのうちの最大値を取得する)
-    seg.update(l - 1, r, cnt + 1) # lからrまでの区間をその最大値 +1 に書き換える
+    cnt = seg.query(l - 1, r) # l, r は1 index,rは開区間なのでそのまま利用。0 indexで[l-1,r)のうちの最大値を取得する)
+    seg.update(l - 1, r, cnt + 1) # 0 indexで[l-1,r)の区間をその最大値 +1 に書き換える
     print(cnt + 1)
