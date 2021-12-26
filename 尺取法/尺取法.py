@@ -1,3 +1,4 @@
+from collections import deque
 q = deque() # 虫体
 for c in a:
     q.append(c)  ## dequeの右端に要素を一つ追加する。
