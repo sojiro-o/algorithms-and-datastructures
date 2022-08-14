@@ -70,6 +70,7 @@ n, m = map(int, input().split())
 graph = [list(map(int,input().split())) for _ in range(m)]
 scc = SCC(n)
 
+sys.setrecursionlimit(10 ** 9) # 再帰の上限を上げる
 for u, v in graph:
     # u → v
     scc.add_edge(u - 1, v - 1)

@@ -1,4 +1,5 @@
 from heapq import heapify, heappop, heappush, heappushpop
+
 class PriorityQueue:
     def __init__(self, heap):
         '''
