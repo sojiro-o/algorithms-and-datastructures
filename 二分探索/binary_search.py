@@ -1,13 +1,45 @@
 # is_ok: この関数が条件を満たすかどうかを二分探索
+def is_ok(index):
+    # 問題によってここの条件を変更する
+    if a[index] >= key:
+        return True
+    else:
+        return False
 
-def meguru_bisect(right, left):
+# a = list()
+# left, right = -1, len(a)
+
+def meguru_bisect(left, right):
+    # リストの右に行けば条件を満たすという前提
+    # left以下、条件を満たさない集合
+    # right以上、条件を満たす集合
     while right - left > 1:
         mid = (right + left) // 2
-        if is_ok(mid) >= k + 1: # まだまだ大きくできる
+        if is_ok(mid): # まだまだ小さくできる
+            # ここより下のrightとleftを変換すると条件を満たす一番大きなindexを取得できる
+            right = mid
+        else:
+            left = mid # 今のよりはmid小さくできない
+    return right # 条件を満たす一番小さなindex
+
+
+def meguru_bisect(left, right):
+    # リストの左に行けば条件を満たすという前提
+    # left以下、条件を満たす合
+    # right以上、条件を満たさない集合
+    while right - left > 1:
+        mid = (right + left) // 2
+        if is_ok(mid): # まだまだ小さくできる
+            # ここより下のrightとleftを変換すると条件を満たす一番大きなindexを取得できる
             left = mid
         else:
-            right = mid # 小さくしなければいけない
-    return ok
+            right = mid # 今のよりはmid小さくできない
+    return left # 条件を満たす一番大きなindex
+
+
+
+
+
 
 # 0からlまでの中で条件を満たす数を返す
 # 例　print(meguru_bisect(l,0))
@@ -18,18 +50,17 @@ N, Q = map(int,input().split())
 A = list(map(int,input().split()))
 A.sort()
 
+# len(A) = N
+
 for _ in range(Q):
     x = int(input())
-    if x <= A[0]:
-        # right - leftの差が2の所でストップするので、そもそもA[0]でも駄目な場合は別に考える。
-        print(N)
-    else:
-        right = N # 扱う対象の最大インデックスより一つ大きい値にすることで、そもそもA[N]でも駄目な場合も一緒に考えることができる。
-        left = 0
-        while right - left > 1:
-            mid = (right + left) // 2
-            if A[mid] < x: # まだまだ大きくできる
-                left = mid
-            else:
-                right = mid
-        print(N-right)
+    # right - leftの差が2の所でストップするのでindexは-1から考える
+    right = lem(A) # 扱う対象の最大インデックスより一つ大きい値にすることで、そもそもA[N]でも駄目な場合も一緒に考えることができる。
+    left = -1
+    while right - left > 1:
+        mid = (right + left) // 2
+        if A[mid] < x: # まだまだ大きくできる
+            left = mid
+        else:
+            right = mid
+    print(N-right)

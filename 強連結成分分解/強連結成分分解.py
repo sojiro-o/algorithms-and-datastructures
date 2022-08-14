@@ -55,8 +55,8 @@ class SCC:
                 self.labels[nxt_v] = self.lb_cnt
 
     def construct(self):
-        self.dag = [[] for i in range(self.lb_cnt)]
-        self.groups = [[] for i in range(self.lb_cnt)]
+        self.dag = [[] for i in range(self.lb_cnt)] # グループ毎の接続関係
+        self.groups = [[] for i in range(self.lb_cnt)] # GP[グループナンバー]:所属するノードリスト
         for v, lb in enumerate(self.labels):
             for nxt_v in self.graph[v]:
                 nxt_lb = self.labels[nxt_v]
@@ -71,9 +71,10 @@ graph = [list(map(int,input().split())) for _ in range(m)]
 scc = SCC(n)
 
 for u, v in graph:
+    # u → v
     scc.add_edge(u - 1, v - 1)
 scc.build()
-_,elems = scc.construct()
+_, elems = scc.construct()
 
 ans = 0
 for i in range(len(elems)):

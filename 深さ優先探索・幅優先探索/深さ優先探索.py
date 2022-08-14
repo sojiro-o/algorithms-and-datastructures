@@ -1,10 +1,13 @@
 # 再帰関数を使う場合
 def dfs(now):
-    for i in path[now]:#path[now] (nowと隣り合うノード)から複数のノードに移動できたとしても、先に１つ目の移動先をすべて見終わるまで次のforに行かないので深さ優先になる
-        if is_calculated[i] ==False:#訪問済みかどうか
-            counter[i]+=counter[now]#何かしらの処理
-            is_calculated[i]=True#訪問済みにする
-            dfs(i)#最後に再帰
+    for i in path[now]:
+        #path[now] (nowと隣り合うノード)から複数のノードに移動できたとしても、先に１つ目の移動先をすべて見終わるまで次のforに行かないので深さ優先になる
+        if is_calculated[i] == False:
+            #訪問済みかどうか
+            counter[i]+=counter[now] # 何かしらの処理
+            is_calculated[i]=True # 訪問済みにする
+            dfs(i) # 最後に再帰
+    # 帰りがけ処理
 
 # メモリを使用する場合
 from collections import deque#listより速いスタックやキューで使うデータ形式

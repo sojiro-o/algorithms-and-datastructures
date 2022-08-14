@@ -93,7 +93,7 @@ class LazySegmentTree:
                 res = self.segfunc(res, self.data[l])
                 l += 1
             if r & 1:
-                res = self.segfunc(res, self.data[r - 1])
+                res = self.segfunc(res, self.data[r - 1]) # 
             l >>= 1
             r >>= 1
         return res
